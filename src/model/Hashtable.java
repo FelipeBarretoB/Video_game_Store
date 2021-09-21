@@ -38,7 +38,9 @@ public class Hashtable {
 		this.key = key;
 	}
 	
-	
+	public String print() {
+		return key+" "+ price+" "+quantity;
+	}
 	
 	
 }

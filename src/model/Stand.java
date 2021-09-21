@@ -23,7 +23,7 @@ public class Stand {
 			int i=0;
 			while(!added && i<levels.length) {
 				if(levels[(pointer+i)%levels.length]== null) {
-					levels[(pointer+i)%levels.length]= new Hashtable(Integer.parseInt(levelValues[0]), Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[0]));
+					levels[(pointer+i)%levels.length]= new Hashtable(Integer.parseInt(levelValues[0]), Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[2]));
 					added = true;
 				}else {
 					i++;
@@ -31,5 +31,14 @@ public class Stand {
 			}
 
 		}
+	}
+	
+	public String print() {
+		String print=name+" "+levels.length+"\n";
+		for(int c=0;c< levels.length;c++) {
+			print+=levels[c].print()+"\n";
+		}
+		
+		return print;
 	}
 }

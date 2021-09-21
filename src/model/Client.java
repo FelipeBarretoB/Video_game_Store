@@ -5,11 +5,17 @@ public class Client {
 	private int code;
 	
 	//String de los juegos que el cliente quiere comprar 
-	private String games;
+	private String[] games;
 
+	public Client(String[] values) {
+		code=Integer.parseInt(values[0]);
+		games=new String[values.length-1];
+		for(int c=1;c<values.length;c++) {
+			games[c-1]=values[c];
+		}
+	}
 	
-	
-	public Client(int code, String games) {
+	public Client(int code, String[] games) {
 		this.code = code;
 		this.games = games;
 	}
@@ -23,13 +29,14 @@ public class Client {
 		this.code = code;
 	}
 
-	public String getGames() {
-		return games;
+	public String print() {
+		String print="";
+		print=code+" ";
+		for(int c=0;c< games.length;c++) {
+			print+=games[c]+" ";
+		}
+		
+		return print;
 	}
-
-	public void setGames(String games) {
-		this.games = games;
-	}
-	
 	
 }

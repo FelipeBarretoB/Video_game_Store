@@ -25,6 +25,7 @@ public class Main {
 		
 		try {
 			ui.numOfCases();
+			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -34,6 +35,7 @@ public class Main {
 		}
 	}
 
+	// El numero de casos que se entra por consola, determina cuantos casos van a entrar
 	public void numOfCases() throws NumberFormatException, IOException {
 		int cases= Integer.parseInt(br.readLine());
 		while(cases!=0){
@@ -44,6 +46,14 @@ public class Main {
 				createNewStand();
 				stands--;
 			}
+			int numOfClients= Integer.parseInt(br.readLine());
+			store.setNumOfClients(numOfClients);
+			store.createClientList();
+			while(numOfClients!=0) {
+				store.addClients(br.readLine());
+				numOfClients--;
+			}
+			test();
 			cases--;
 		}
 	}
@@ -57,7 +67,15 @@ public class Main {
 		for(int c=0; c< values.length;c++) {
 			values[c]=br.readLine();
 		}
-		store.CreateStand(name, levels, values);
+		store.createStand(name, levels, values);
+	}
+	
+	
+	
+	public void test() throws IOException {
+		bw.write(store.printStands());
+		bw.write(store.printClients());
+		bw.flush();
 	}
 
 }

@@ -9,6 +9,10 @@ public class Store {
 	private int numOfStands;
 
 	private Stand[] stands;
+	
+	private int numOfClients;
+	
+	private Client[] clients;
 
 	public Store(){};
 
@@ -16,6 +20,8 @@ public class Store {
 		this.numCashRegister = numCashRegister;
 		this.numOfStands = numOfStands;
 		stands= new Stand[numOfStands];
+		numOfClients=-1;
+		clients=null;
 	}
 
 	public int getNumCashRegister() {
@@ -41,25 +47,56 @@ public class Store {
 	public void setStands(Stand[] stands) {
 		this.stands = stands;
 	}
+	
+	public void setNumOfClients(int c) {
+		numOfClients=c;
+	}
 
-	public void CreateStand(String name, int levels, String[] values) {
-		if(searchEmpty()!=-1){
-			int c=searchEmpty();
+	public void createStand(String name, int levels, String[] values) {
+		if(searchEmpty(stands)!=-1){
+			int c=searchEmpty(stands);
 			stands[c]= new Stand(name, levels, values);
 			stands[c].hash();
 		}
 	}
 
-	public int searchEmpty() {
+	public int searchEmpty( Object[] array) {
 		boolean found =false;
 		int spot=-1;
-		for(int c=0; c< stands.length && !found;c++) {
-			if(stands[c]==null) {
+		for(int c=0; c< array.length && !found;c++) {
+			if(array[c]==null) {
 				spot=c;
 				
 			}
 		}
 		return spot;
+	}
+	
+	public void createClientList() {
+		clients=new Client[numOfClients];
+	}
+	
+	public void addClients(String clientData) {
+		if(searchEmpty(clients)!=-1){
+			int c=searchEmpty(clients);
+			clients[c]=new Client(clientData.split(" "));
+		}
+	}
+	
+	public String printClients() {
+		String print="";
+		for(int c=0;c<clients.length;c++) {
+			print+=clients[c].print();
+		}
+		return print;
+	}
+	
+	public String printStands() {
+		String print="";
+		for(int c=0;c<stands.length;c++) {
+			print+=stands[c].print();
+		}
+		return print;
 	}
 
 }
