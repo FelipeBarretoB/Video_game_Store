@@ -41,4 +41,31 @@ public class Stand {
 		
 		return print;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Hashtable[] getLevels() {
+		return levels;
+	}
+
+	public void setLevels(Hashtable[] levels) {
+		this.levels = levels;
+	}
+
+	public String[] getValues() {
+		return values;
+	}
+
+	public void setValues(String[] values) {
+		this.values = values;
+	}
+	
+	
+	
 }

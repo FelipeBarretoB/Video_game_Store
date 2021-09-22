@@ -53,7 +53,8 @@ public class Main {
 				store.addClients(br.readLine());
 				numOfClients--;
 			}
-			test();
+			store.orderClientLists();
+			//test();
 			cases--;
 		}
 	}

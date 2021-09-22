@@ -1,11 +1,15 @@
 package model;
 
+import java.util.Queue;
+
 public class Client {
 	//Es la cedula/codigo mencionado en el enunciado
 	private int code;
 	
 	//String de los juegos que el cliente quiere comprar 
 	private String[] games;
+	
+	private Queue<String> gameQueue;
 
 	public Client(String[] values) {
 		code=Integer.parseInt(values[0]);
@@ -13,8 +17,17 @@ public class Client {
 		for(int c=1;c<values.length;c++) {
 			games[c-1]=values[c];
 		}
+		gameQueue=null;
 	}
 	
+	public Queue<String> getGameQueue() {
+		return gameQueue;
+	}
+
+	public void setGameQueue(Queue<String> gameQueue) {
+		this.gameQueue = gameQueue;
+	}
+
 	public Client(int code, String[] games) {
 		this.code = code;
 		this.games = games;
@@ -23,6 +36,14 @@ public class Client {
 
 	public int getCode() {
 		return code;
+	}
+	
+	public String[] getGames(){
+		return games;
+	}
+	
+	public void setGames(String [] games) {
+		this.games=games;
 	}
 
 	public void setCode(int code) {
