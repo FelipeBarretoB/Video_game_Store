@@ -18,15 +18,15 @@ public class Stand {
 	public void hash() {
 		for(int c=0; c <values.length;c++) {
 			String[] levelValues= values[c].split(" ");
-			int pointer= Integer.parseInt(levelValues[0])%levels.length;
+			int pointer= levels.length-1;
 			boolean added= false;
-			int i=0;
-			while(!added && i<levels.length) {
-				if(levels[(pointer+i)%levels.length]== null) {
-					levels[(pointer+i)%levels.length]= new Hashtable(Integer.parseInt(levelValues[0]), Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[2]));
+			
+			while(!added && pointer>=0) {
+				if(levels[(pointer)]== null) {
+					levels[(pointer)]= new Hashtable(Integer.parseInt(levelValues[0]), Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[2]));
 					added = true;
 				}else {
-					i++;
+					pointer--;
 				}
 			}
 
