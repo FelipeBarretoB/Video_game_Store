@@ -27,6 +27,8 @@ public class Store {
 		clients=null;
 	}
 
+	// Getters and Setters
+	
 	public int getNumCashRegister() {
 		return numCashRegister;
 	}
@@ -55,6 +57,8 @@ public class Store {
 		numOfClients=c;
 	}
 
+	// Methods
+	
 	public void createStand(String name, int levels, String[] values) {
 		int c=searchEmpty(stands);
 		if(c!=-1){
