@@ -54,7 +54,11 @@ public class Main {
 				numOfClients--;
 			}
 			store.orderClientLists();
-			//test();
+			store.stackGames();
+			store.orderClientsByTime();
+			
+			bw.write(store.cashRegisters());
+			bw.flush();
 			cases--;
 		}
 	}

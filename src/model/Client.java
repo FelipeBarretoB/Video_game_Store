@@ -1,6 +1,8 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Client {
 	//Es la cedula/codigo mencionado en el enunciado
@@ -9,7 +11,13 @@ public class Client {
 	//String de los juegos que el cliente quiere comprar 
 	private String[] games;
 	
-	private Queue<String> gameQueue;
+	private Queue<Integer> gameQueue;
+	
+	private Stack<Integer> gameStack;
+	
+	private int time;
+	
+	private double price;
 
 	public Client(String[] values) {
 		code=Integer.parseInt(values[0]);
@@ -17,14 +25,17 @@ public class Client {
 		for(int c=1;c<values.length;c++) {
 			games[c-1]=values[c];
 		}
-		gameQueue=null;
+		gameQueue=new LinkedList<>();
+		gameStack=new Stack<>();
+		time=0;
+		price=0;
 	}
 	
-	public Queue<String> getGameQueue() {
+	public Queue<Integer> getGameQueue() {
 		return gameQueue;
 	}
 
-	public void setGameQueue(Queue<String> gameQueue) {
+	public void setGameQueue(Queue<Integer> gameQueue) {
 		this.gameQueue = gameQueue;
 	}
 
@@ -57,6 +68,38 @@ public class Client {
 			print+=games[c]+" ";
 		}
 		
+		return print;
+	}
+
+	public Stack<Integer> getGameStack() {
+		return gameStack;
+	}
+
+	public void setGameStack(Stack<Integer> gameStack) {
+		this.gameStack = gameStack;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public String printGames() {
+		String print="";
+		for(int c=0;c< games.length;c++) {
+			print+=games[c]+" ";
+		}
 		return print;
 	}
 	

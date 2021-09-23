@@ -66,6 +66,7 @@ public class Stand {
 		this.values = values;
 	}
 	
+
 	
 	
 }

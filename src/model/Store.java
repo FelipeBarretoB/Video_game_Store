@@ -1,5 +1,8 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Store {
 
 	//numero de cajeros
@@ -102,7 +105,8 @@ public class Store {
 	public void orderClientLists() {
 		for(int c=0; c< clients.length;c++) {
 			String[] games=clients[c].getGames();
-			orderInStands(games);
+			clients[c].setGames(orderInStands(games));
+			clients[c].setGameQueue(addElementsToQueue(clients[c].getGames()));
 		}
 	}
 
@@ -124,6 +128,15 @@ public class Store {
 		}
 		games=orderInStands(games, standOrder, levels);
 		return games;
+	}
+
+	//Vuelve la lista organizada a una queue 
+	public Queue<Integer> addElementsToQueue(String [] games){
+		Queue<Integer> gameQueue= new LinkedList<>();
+		for(int c=0;c<games.length;c++) {
+			gameQueue.add(Integer.parseInt(games[c]));
+		}
+		return gameQueue;
 	}
 
 	//Organiza la lista de compra del cliente 
@@ -157,13 +170,96 @@ public class Store {
 					levels[j+1] = temp;
 				}
 			}
-		//TODO borrar, esto es una prueba
-		for(int c=0;c < games.length;c++) {
-			System.out.println("Game "+games[c]+" Stand "+order[c]+" level "+levels[c]);
-		}
-		
-		
 		return games;
 	}
 
+	//Le da el tiempo que se demoraron los clientes en la tienda, esta es una función de la posición(pos) de en donde llegaron + cuantos juegos tienen que buscar en las estanterias (Stack.size())
+	public void sortTime(Client client, int pos) {
+		client.setTime(pos+client.getGameStack().size());
+	}
+
+
+	public void stackGames() {
+		for(int c=0;c<clients.length;c++) {
+			searchGame(clients[c]);
+			sortTime(clients[c], c);
+		}
+	}
+
+	//Organiza las stacks de los juegos
+	public void searchGame(Client client) {
+		boolean stop=false;
+		for(int c=0;c<stands.length&& !stop;c++) {
+			for(int i=0;i<stands[c].getLevels().length && !stop;i++) {
+				if(client.getGameQueue().isEmpty()) {
+					stop=true;	
+				}else if(client.getGameQueue().peek()== stands[c].getLevels()[i].getKey()) {
+					if(stands[c].getLevels()[i].getQuantity()==0) {
+						client.getGameQueue().poll();
+					}else {
+						client.getGameStack().add(client.getGameQueue().poll());
+						
+						stands[c].getLevels()[i].setQuantity(stands[c].getLevels()[i].getQuantity()-1);
+
+					}
+				}
+			}
+		}
+	}
+
+	public void orderClientsByTime() {
+		for(int c=0;c<clients.length-1;c++) {
+			for(int i=c;i <clients.length-c-1;i++) {
+				if(clients[i].getTime()>clients[i+1].getTime()) {
+					Client temp = clients[i];
+					clients[i] = clients[i+1];
+					clients[i+1] = temp;
+				}
+			}
+		}
+	}
+
+	public String cashRegisters() {
+		Queue<Client> gameQueue= new LinkedList<>();
+		Client[] clientsInRegisters=new Client[numCashRegister];
+		String print="";
+		for(int c=0;c<clients.length;c++) {
+			gameQueue.add(clients[c]);
+		}
+		do{
+			for(int c=0;c<clientsInRegisters.length;c++) {
+				if(clientsInRegisters[c]==null) {
+					if(!gameQueue.isEmpty()) {
+						clientsInRegisters[c]=gameQueue.poll();
+					}
+				}else if(clientsInRegisters[c].getGameStack().isEmpty()) {	
+					print+=clientsInRegisters[c].getCode()+" "+clientsInRegisters[c].getPrice()+"\n"+clientsInRegisters[c].printGames()+"\n";
+					clientsInRegisters[c]=null;
+				}else if(!clientsInRegisters[c].getGameStack().isEmpty()) {
+					boolean found=false;
+					for(int j=0;j<stands.length&& !found;j++) {
+						for(int i=0;i<stands[j].getLevels().length&& !found;i++) {
+							if(clientsInRegisters[c].getGameStack().peek()==stands[j].getLevels()[i].getKey()) {
+								clientsInRegisters[c].setPrice(clientsInRegisters[c].getPrice()+stands[j].getLevels()[i].getPrice());
+								clientsInRegisters[c].getGameStack().pop();
+								found=true;
+							}
+						}
+
+					}
+				}
+			}
+		}while(!checkForArrayOfNull(clientsInRegisters) || !gameQueue.isEmpty());
+		return print;
+	}
+	
+	private boolean checkForArrayOfNull(Client[] test) {
+		boolean empty = true;
+		for(int c=0;c<test.length;c++) {
+			if(test[c]!=null) {
+				empty=false;
+			}
+		}
+		return empty;
+	}
 }
