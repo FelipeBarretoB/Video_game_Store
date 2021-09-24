@@ -6,21 +6,43 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.Store;
 
-public class Main {
-
+public class Main extends Application {
+	
+	private VideoGameStoreGUI videoGameStoreGUI;
 	private BufferedReader br;
 	private BufferedWriter bw;
 	private Store store;
 
 	public Main() {
+		videoGameStoreGUI = new VideoGameStoreGUI();
 		store= new Store();
 		br= new BufferedReader(new InputStreamReader(System.in));
 		bw= new BufferedWriter(new OutputStreamWriter(System.out));
 	}
-
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
+		FXMLLoader fxmlLoader= new FXMLLoader(getClass().getResource("mainPage.fxml"));
+		fxmlLoader.setController(videoGameStoreGUI);
+		Parent root= fxmlLoader.load();
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("VIDEOGAME STORE");
+		primaryStage.show();
+		videoGameStoreGUI.loadMainPage();
+		
+	}
+	
 	public static void main(String[] args) {
+		launch(args); 
 		Main ui= new Main();
 		
 		try {

@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="134.0" layoutY="95.0" text="Nombre" />
-      <Label layoutX="151.0" layoutY="134.0" text="Pisos" />
-      <TextField layoutX="210.0" layoutY="91.0" />
-      <TextField layoutX="210.0" layoutY="130.0" />
-      <TextArea layoutX="211.0" layoutY="191.0" prefHeight="122.0" prefWidth="295.0" />
-      <Label layoutX="146.0" layoutY="168.0" text="Juegos" />
+      <Label layoutX="87.0" layoutY="134.0" text="Cantidad de pisos" />
+      <TextField fx:id="txtShelveName" layoutX="210.0" layoutY="91.0" />
+      <TextField fx:id="txtShelveFloors" layoutX="210.0" layoutY="130.0" />
+      <TextArea fx:id="txtShelveGames" layoutX="211.0" layoutY="202.0" prefHeight="104.0" prefWidth="295.0" />
+      <Label layoutX="145.0" layoutY="168.0" text="Juegos" />
       <Label layoutX="193.0" layoutY="24.0" text="Crear Estantería">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <Button layoutX="255.0" layoutY="335.0" mnemonicParsing="false" text="Agregar" />
-      <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" text="Volver" />
-      <Label layoutX="210.0" layoutY="168.0" text="Registrar asi: (código;precio;cantidad)(cada renglon es un juego)" />
+      <Button layoutX="255.0" layoutY="335.0" mnemonicParsing="false" onAction="#addShelve" text="Agregar" />
+      <Button layoutX="26.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" text="Volver" />
+      <Label layoutX="210.0" layoutY="168.0" prefHeight="17.0" prefWidth="332.0" text="Registrar código, precio y cantidad separados por un espacio" />
+      <Label layoutX="210.0" layoutY="185.0" text="(un juego por renglón)" />
    </children>
 </Pane>
