@@ -2,33 +2,31 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="507.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="248.0" layoutY="96.0" text="Cajeros:" />
-      <Label layoutX="40.0" layoutY="157.0" text="Estantes:" />
-      <Button layoutX="94.0" layoutY="248.0" mnemonicParsing="false" onAction="#openAddShelve" prefHeight="25.0" prefWidth="122.0" text="Agregar estante" />
-      <Button layoutX="216.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Borrar estante" />
-      <TextField fx:id="txtCashierAmount" layoutX="301.0" layoutY="92.0" prefHeight="25.0" prefWidth="122.0" />
+      <Label layoutX="44.0" layoutY="90.0" text="Cajeros:" />
+      <Label layoutX="44.0" layoutY="153.0" text="Estantes:" />
+      <Button layoutX="158.0" layoutY="149.0" mnemonicParsing="false" onAction="#openAddShelve" prefHeight="25.0" prefWidth="122.0" text="Agregar estante" />
+      <TextField fx:id="txtCashierAmount" layoutX="158.0" layoutY="86.0" prefHeight="25.0" prefWidth="42.0" />
       <Label layoutX="298.0" layoutY="34.0" text="Crear Caso">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <ListView fx:id="lvGames" layoutX="240.0" layoutY="307.0" prefHeight="95.0" prefWidth="243.0" />
-      <Label layoutX="196.0" layoutY="307.0" text="Juegos:" />
-      <Label layoutX="548.0" layoutY="439.0" text="Total de casos:" />
-      <Button layoutX="319.0" layoutY="444.0" mnemonicParsing="false" onAction="#addCase" text="Agregar caso" />
-      <Label fx:id="labTotalCases" layoutX="637.0" layoutY="439.0" text="0" />
-      <ListView fx:id="lvClients" layoutX="414.0" layoutY="153.0" prefHeight="95.0" prefWidth="243.0" />
-      <Label layoutX="362.0" layoutY="157.0" text="Clientes:" />
-      <Button layoutX="413.0" layoutY="248.0" mnemonicParsing="false" onAction="#openAddClient" prefHeight="25.0" prefWidth="122.0" text="Agregar Cliente" />
-      <Button layoutX="535.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Borrar Cliente" />
-      <Button layoutX="526.0" layoutY="469.0" mnemonicParsing="false" onAction="#finish" text="Enviar todo y terminar uwu" />
-      <ListView fx:id="lvShelves" layoutX="95.0" layoutY="153.0" prefHeight="95.0" prefWidth="243.0" />
+      <Label layoutX="114.0" layoutY="391.0" text="Total de casos:" />
+      <Button layoutX="120.0" layoutY="329.0" mnemonicParsing="false" onAction="#addCase" text="Agregar caso" />
+      <Label fx:id="labTotalCases" layoutX="203.0" layoutY="391.0" text="0" />
+      <Label layoutX="45.0" layoutY="216.0" text="Clientes:" />
+      <Button layoutX="158.0" layoutY="212.0" mnemonicParsing="false" onAction="#openAddClient" prefHeight="25.0" prefWidth="122.0" text="Agregar Cliente" />
+      <Button layoutX="83.0" layoutY="423.0" mnemonicParsing="false" onAction="#finish" text="Enviar todo y terminar uwu" />
+      <Label fx:id="labShelvesAmount" layoutX="118.0" layoutY="153.0" text="0" />
+      <Label fx:id="labClientsAmount" layoutX="118.0" layoutY="216.0" text="0" />
+      <Label fx:id="labFinalCase" layoutX="506.0" layoutY="132.0" />
+      <Button layoutX="482.0" layoutY="354.0" mnemonicParsing="false" onAction="#update" text="Actualizar" />
+      <Label layoutX="468.0" layoutY="90.0" text="Progreso del caso" />
    </children>
 </Pane>
