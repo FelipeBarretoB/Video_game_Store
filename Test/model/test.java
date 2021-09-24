@@ -2,14 +2,22 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import dataStructureQueue.Queue;
+import dataStructureStack.Stack;
+
 public class test {
 	
-	//Probar stands
+	private Queue<?> queue;
 	
-	//Probar clients 
+	private Stack<?> stack;
 	
-	//Probar proceso completo
+	public void setUpSenario1() {
+		queue= new Queue<>();
+		stack= new Stack<>();
+	}
 	
-	//Probar hashTable
+	//probar stacks
+	
+	//probar queue
 	
 }
