@@ -18,9 +18,9 @@ import javafx.scene.layout.Pane;
 
 public class VideoGameStoreGUI {
 	
-	private String total;
+	private String total = "";
 	
-	private String inCase;
+	private String inCase = "";
 	
 	private String shelves = "";
 	
@@ -84,13 +84,21 @@ public class VideoGameStoreGUI {
 
     @FXML
     void addCase(ActionEvent event) {
-    	inCase = cashiers + "\n" + shelvesAmount +
-    			"\n" + shelves + "\n" + clientsAmount + "\n" + clients;
-    	
+    	inCase = cashiers + "\n" + shelvesAmount + shelves + "\n" + clientsAmount + clients;
     	total += inCase;
     	totalAmount++;
+    	clearAll();
+    	txtCashierAmount.setText("");
     }
-
+    
+    void clearAll() {
+    	cashiers = 0;
+    	shelvesAmount = 0;
+    	clientsAmount = 0;
+    	shelves = "";
+    	clients = "";
+    	inCase = "";
+    }
     @FXML
     void finish(ActionEvent event) {
     	total = totalAmount + total;
