@@ -47,7 +47,7 @@ public class VideoGameStoreGUI {
 	//CreateCase
 	
 	@FXML
-    private Label labFinalCase;
+    private TextArea labFinalCase;
 	
 	@FXML
     private Label labShelvesAmount;
@@ -124,14 +124,59 @@ public class VideoGameStoreGUI {
     private TextField txtClientGames;
 
     @FXML
-    private Label labAbleGames;
+    private TextArea labAbleGames;
+    
+    @FXML
+    private Label labConfirmClient;
+    
+    public String[] getColumn(int x, String[][] str) {
+    	String[] column = new String[str.length];
+    	for (int i = 0; i < column.length; i++) {
+			column[i] = str[i][x];
+		}
+    	return column;
+    }
+    
+    public String[][] stringToMatrix(String s){
+    	String[] rows = s.split("\n");
+    	String[][] matrix = new String[rows.length][];
+    	for (int i = 0; i < rows.length; i++) {
+			matrix[i] = rows[i].split(" ");
+		}
+    	return matrix;
+    }
+    
+    public boolean checkOrder(String[] libary,String[] client) {
+    	boolean x = false;
+    	for(int i = 0; i<client.length; i++) {
+			for(int j = 0; j < libary.length && !x; j++) {
+				if(client[i].equals(libary[j])) {
+					x = true;
+				}
+			}
+			if(!x) return false;
+		}
+    	return true;
+    }
     
     @FXML
     void addClient(ActionEvent event) {
-    	clients += "\n" + txtClientId.getText() + " " + txtClientGames.getText();
-    	clientsAmount++;
-    	txtClientId.setText("");
-    	txtClientGames.setText("");
+    	String[] storeGames = getColumn(0,stringToMatrix(totalGames));
+    	
+    	if(!txtClientId.getText().equals("") && !txtClientGames.getText().equals("")) {
+    		String[] clientGames = txtClientGames.getText().split(" ");
+    		if(checkOrder(storeGames,clientGames)) {
+    			clients += "\n" + txtClientId.getText() + " " + txtClientGames.getText();
+            	clientsAmount++;
+            	txtClientId.setText("");
+            	txtClientGames.setText("");
+    		}else {
+    			labConfirmClient.setText("Todos los juegos del cliente deben existir en el catálogo de juegos disponibles");
+    		}
+    	}else {
+    		labConfirmClient.setText("Todods los espacios deben estar llenos");
+    	}
+    	
     }
 
     @FXML
@@ -160,22 +205,40 @@ public class VideoGameStoreGUI {
 
     @FXML
     private TextArea txtShelveGames;
+    
+    @FXML
+    private Label labConfirmShelves;
 
     @FXML
     void addShelve(ActionEvent event) {
     	String shelve = "";
-    	String[] games = txtShelveGames.getText().split("\n");
-    	shelve = txtShelveName.getText() + " " + txtShelveFloors.getText();
-    	for(int i = 0; i < games.length ;i++) {
-    		shelve += "\n" + games[i];
-    		totalGames += "\n" + games[i];
+    	String[] games;
+    	if(!txtShelveGames.getText().equals("") && !txtShelveName.getText().equals("") && !txtShelveFloors.getText().equals("")) {
+    		games = txtShelveGames.getText().split("\n");
+    		
+    		try {
+    			if(games.length == Integer.parseInt(txtShelveFloors.getText())) {
+        			shelve = txtShelveName.getText() + " " + txtShelveFloors.getText();
+        	    	for(int i = 0; i < games.length ;i++) {
+        	    		shelve += "\n" + games[i];
+        	    		totalGames += "\n" + games[i];
+        	    	}
+        	    	shelves += "\n" + shelve;
+        	    	shelvesAmount++;
+        	    	
+        	    	txtShelveName.setText("");
+        	    	txtShelveFloors.setText("");
+        	    	txtShelveGames.setText("");
+        	    	labConfirmShelves.setText("");
+        		}else {
+        			labConfirmShelves.setText("La cantidad de juegos debe ser igual a la cantidad de pisos");
+        		}
+    		}catch (NumberFormatException e) {
+    			labConfirmShelves.setText("La cantidad de pisos debe ser un número");
+    		}
+    	}else {
+    		labConfirmShelves.setText("Todods los espacioos deben estar llenos");
     	}
-    	shelves += "\n" + shelve;
-    	shelvesAmount++;
-    	
-    	txtShelveName.setText("");
-    	txtShelveFloors.setText("");
-    	txtShelveGames.setText("");
     }
 	
     public void loadPage(String page) {
