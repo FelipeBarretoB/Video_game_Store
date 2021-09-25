@@ -1,8 +1,9 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+
+import dataStructureQueue.Queue;
+import dataStructureStack.Stack;
+
 
 public class Client {
 	//Es la cedula/codigo mencionado en el enunciado
@@ -25,7 +26,7 @@ public class Client {
 		for(int c=1;c<values.length;c++) {
 			games[c-1]=values[c];
 		}
-		gameQueue=new LinkedList<>();
+		gameQueue=new Queue<>();
 		gameStack=new Stack<>();
 		time=0;
 		price=0;

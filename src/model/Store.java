@@ -1,7 +1,6 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import dataStructureQueue.Queue;
 
 public class Store {
 
@@ -136,7 +135,7 @@ public class Store {
 
 	//Vuelve la lista organizada a una queue 
 	public Queue<Integer> addElementsToQueue(String [] games){
-		Queue<Integer> gameQueue= new LinkedList<>();
+		Queue<Integer> gameQueue= new Queue<>();
 		for(int c=0;c<games.length;c++) {
 			gameQueue.add(Integer.parseInt(games[c]));
 		}
@@ -202,7 +201,6 @@ public class Store {
 						client.getGameQueue().poll();
 					}else {
 						client.getGameStack().add(client.getGameQueue().poll());
-						
 						stands[c].getLevels()[i].setQuantity(stands[c].getLevels()[i].getQuantity()-1);
 
 					}
@@ -223,8 +221,9 @@ public class Store {
 		}
 	}
 
+	//lugar donde se paga lol
 	public String cashRegisters() {
-		Queue<Client> gameQueue= new LinkedList<>();
+		Queue<Client> gameQueue= new Queue<>();
 		Client[] clientsInRegisters=new Client[numCashRegister];
 		String print="";
 		for(int c=0;c<clients.length;c++) {
