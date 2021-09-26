@@ -88,6 +88,7 @@ public class VideoGameStoreGUI {
     	labClientsAmount.setText(String.valueOf(clientsAmount));
     	txaFinalCase.setText(inCaseProgress());
     	txtCashierAmount.setText(String.valueOf(cashiers));
+    	labTotalCases.setText(String.valueOf(totalAmount));
     }
 
     @FXML
@@ -98,6 +99,7 @@ public class VideoGameStoreGUI {
     	clearAll();
     	txtCashierAmount.setText("");
     	txaFinalCase.setText("");
+    	labTotalCases.setText(String.valueOf(totalAmount));
     }
     
     void clearAll() {
@@ -260,6 +262,7 @@ public class VideoGameStoreGUI {
     	labClientsAmount.setText(String.valueOf(clientsAmount));
     	txaFinalCase.setText(inCaseProgress());
     	txtCashierAmount.setText(String.valueOf(cashiers));
+    	labTotalCases.setText(String.valueOf(totalAmount));
     }
     
     public String inCaseProgress() {
