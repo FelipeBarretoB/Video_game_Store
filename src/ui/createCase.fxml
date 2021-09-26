@@ -27,7 +27,7 @@
       <Label fx:id="labShelvesAmount" layoutX="118.0" layoutY="153.0" text="0" />
       <Label fx:id="labClientsAmount" layoutX="118.0" layoutY="216.0" text="0" />
       <Button layoutX="482.0" layoutY="354.0" mnemonicParsing="false" onAction="#update" text="Actualizar" />
-      <Label layoutX="468.0" layoutY="90.0" text="Progreso del caso" />
-      <TextArea fx:id="labFinalCase" editable="false" layoutX="416.0" layoutY="125.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="labStatus" layoutX="468.0" layoutY="90.0" text="Progreso del caso" />
+      <TextArea fx:id="txaFinalCase" editable="false" layoutX="416.0" layoutY="125.0" prefHeight="200.0" prefWidth="200.0" />
    </children>
 </Pane>

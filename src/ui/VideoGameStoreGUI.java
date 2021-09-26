@@ -1,22 +1,27 @@
 package ui;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
 
+import dataStructureQueue.Queue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import model.Store;
 
 public class VideoGameStoreGUI {
+	
+	private Store store;
 	
 	private String total = "";
 	
@@ -47,7 +52,10 @@ public class VideoGameStoreGUI {
 	//CreateCase
 	
 	@FXML
-    private TextArea labFinalCase;
+    private TextArea txaFinalCase;
+	
+	@FXML
+    private Label labStatus;
 	
 	@FXML
     private Label labShelvesAmount;
@@ -78,7 +86,7 @@ public class VideoGameStoreGUI {
     	loadPage("createCase.fxml");
     	labShelvesAmount.setText(String.valueOf(shelvesAmount));
     	labClientsAmount.setText(String.valueOf(clientsAmount));
-    	labFinalCase.setText(inCaseProgress());
+    	txaFinalCase.setText(inCaseProgress());
     	txtCashierAmount.setText(String.valueOf(cashiers));
     }
 
@@ -89,6 +97,7 @@ public class VideoGameStoreGUI {
     	totalAmount++;
     	clearAll();
     	txtCashierAmount.setText("");
+    	txaFinalCase.setText("");
     }
     
     void clearAll() {
@@ -100,10 +109,67 @@ public class VideoGameStoreGUI {
     	inCase = "";
     }
     @FXML
-    void finish(ActionEvent event) {
-    	total = totalAmount + total;
+    void finish(ActionEvent event) throws IOException {
+    	total = totalAmount + "\n"+total;
     	System.out.println(total);
+    	System.out.println(numOfCases(total));
+    	labStatus.setText("Resultado final");
+    	txaFinalCase.setText(numOfCases(total));    	
+    	
     }
+    
+    public Queue arrayToQueue(String [] array) {
+    	Queue<String> queue = new Queue<String>();
+    	for (int i = 0; i < array.length; i++) {
+			queue.add(array[i]);
+		}
+    	return queue;
+    }
+    
+    public String numOfCases(String end) throws NumberFormatException, IOException {
+    	String[] tem = end.split("\n");
+    	String ans = "";
+    	Queue<String> problem = arrayToQueue(tem);
+    	
+    	
+		int cases= Integer.parseInt(problem.poll());
+		while(cases!=0){
+			int cashRegisters = Integer.parseInt(problem.poll());
+			int stands = Integer.parseInt(problem.poll());
+			store= new Store(cashRegisters, stands);
+			while(stands!=0) {
+				problem = createNewStand(problem);
+				stands--;
+			}
+			int numOfClients= Integer.parseInt(problem.poll());
+			store.setNumOfClients(numOfClients);
+			store.createClientList();
+			while(numOfClients!=0) {
+				store.addClients(problem.poll());
+				numOfClients--;
+			}
+			store.orderClientLists();
+			store.stackGames();
+			store.orderClientsByTime();
+			
+			ans += store.cashRegisters();
+			cases--;
+		}
+		return ans;
+	}
+    
+    public Queue <String> createNewStand(Queue<String> stants) throws IOException {
+		String nameAndLevels= stants.poll();
+		String[] separateNameAndLevel=nameAndLevels.split(" ");
+		String name= separateNameAndLevel[0];
+		int levels= Integer.parseInt(separateNameAndLevel[1]);
+		String[] values= new String[levels];
+		for(int c=0; c< values.length;c++) {
+			values[c]=stants.poll();
+		}
+		store.createStand(name, levels, values);
+		return stants;
+	}
 
     @FXML
     void openAddClient(ActionEvent event) {
@@ -192,7 +258,7 @@ public class VideoGameStoreGUI {
     	loadPage("createCase.fxml");
     	labShelvesAmount.setText(String.valueOf(shelvesAmount));
     	labClientsAmount.setText(String.valueOf(clientsAmount));
-    	labFinalCase.setText(inCaseProgress());
+    	txaFinalCase.setText(inCaseProgress());
     	txtCashierAmount.setText(String.valueOf(cashiers));
     }
     
@@ -260,5 +326,78 @@ public class VideoGameStoreGUI {
 			e.printStackTrace();
 		} 
     }
+
+	public String getTotal() {
+		return total;
+	}
+
+	public void setTotal(String total) {
+		this.total = total;
+	}
+
+	public String getInCase() {
+		return inCase;
+	}
+
+	public void setInCase(String inCase) {
+		this.inCase = inCase;
+	}
+
+	public String getShelves() {
+		return shelves;
+	}
+
+	public void setShelves(String shelves) {
+		this.shelves = shelves;
+	}
+
+	public String getClients() {
+		return clients;
+	}
+
+	public void setClients(String clients) {
+		this.clients = clients;
+	}
+
+	public String getTotalGames() {
+		return totalGames;
+	}
+
+	public void setTotalGames(String totalGames) {
+		this.totalGames = totalGames;
+	}
+
+	public int getCashiers() {
+		return cashiers;
+	}
+
+	public void setCashiers(int cashiers) {
+		this.cashiers = cashiers;
+	}
+
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public int getClientsAmount() {
+		return clientsAmount;
+	}
+
+	public void setClientsAmount(int clientsAmount) {
+		this.clientsAmount = clientsAmount;
+	}
+
+	public int getShelvesAmount() {
+		return shelvesAmount;
+	}
+
+	public void setShelvesAmount(int shelvesAmount) {
+		this.shelvesAmount = shelvesAmount;
+	}
 	
+    
 }
