@@ -22,13 +22,21 @@ public class Stack<T> implements StackInterface<T>{
 		return stack.isEmpty();
 	}
 	
-	public T pop() {
-		T temp=stack.get(0);
-		stack.remove(0);
-		return temp;
+	public T pop() { // In case it stops working, I changed pop and peek
+		if (isEmpty()) {
+			return null;
+		} else {			
+			T temp=stack.get(0);
+			stack.remove(0);
+			return temp;
+		}
 	}
 	public T peek() {
-		return stack.get(0);
+		if (isEmpty()) {
+			return null;
+		} else {			
+			return stack.get(0);
+		}
 	}
 	public int size() {
 		return stack.size();
