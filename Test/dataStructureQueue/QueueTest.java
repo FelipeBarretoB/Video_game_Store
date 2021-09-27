@@ -50,6 +50,9 @@ public class QueueTest {
 	@Test
 	public void testIsEmpty() {
 		setupScenario3();
+		queue.poll();
+		assertTrue(queue.size() == 0);
+		
 	}
 	
 	@Test
