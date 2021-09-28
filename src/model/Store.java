@@ -192,6 +192,8 @@ public class Store {
 	//Organiza las stacks de los juegos
 	public void searchGame(Client client) {
 		boolean stop=false;
+		client.setGames(null);
+		String newGames="";
 		for(int c=0;c<stands.length&& !stop;c++) {
 			for(int i=0;i<stands[c].getLevels().length && !stop;i++) {
 				if(client.getGameQueue().isEmpty()) {
@@ -200,13 +202,14 @@ public class Store {
 					if(stands[c].getLevels()[i].getQuantity()==0) {
 						client.getGameQueue().poll();
 					}else {
+						newGames+=client.getGameQueue().peek()+" ";
 						client.getGameStack().add(client.getGameQueue().poll());
 						stands[c].getLevels()[i].setQuantity(stands[c].getLevels()[i].getQuantity()-1);
-
 					}
 				}
 			}
 		}
+		client.setGames(newGames.split(" "));
 	}
 
 	public void orderClientsByTime() {
