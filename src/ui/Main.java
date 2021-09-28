@@ -1,30 +1,38 @@
 package ui;
-
+/*
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
+import model.Store;
+*/
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Store;
 
+
+
+//Buenas como veras, hay muchas cosas documentadas, todo lo que este documentado aquí, es lo que hicimos primero, es decir, el programa por consola, este debería funcionar si des documentas todo, así que si quieres dale
+//Además, usamos los mismos métodos que usamos para la GUI, así que tambien los puedes revisar por aquí, si quieres. En todo caso, que tengas un buen día persona que está leyendo mi pésima ortografía.
 public class Main extends Application {
 	
 	private VideoGameStoreGUI videoGameStoreGUI;
+	/*
 	private BufferedReader br;
 	private BufferedWriter bw;
 	private Store store;
+	*/
 
 	public Main() {
 		videoGameStoreGUI = new VideoGameStoreGUI();
+		/*
 		store= new Store();
 		br= new BufferedReader(new InputStreamReader(System.in));
 		bw= new BufferedWriter(new OutputStreamWriter(System.out));
+		*/
 	}
 	
 	@Override
@@ -43,6 +51,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args); 
+		/*
 		Main ui= new Main();
 		
 		try {
@@ -55,8 +64,9 @@ public class Main extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
-
+	/*
 	// El numero de casos que se entra por consola, determina cuantos casos van a entrar
 	public void numOfCases() throws NumberFormatException, IOException {
 		int cases= Integer.parseInt(br.readLine());
@@ -104,7 +114,7 @@ public class Main extends Application {
 		bw.write(store.printClients());
 		bw.flush();
 	}
-
+	*/
 }
 
 

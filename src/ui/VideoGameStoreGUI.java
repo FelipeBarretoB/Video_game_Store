@@ -1,12 +1,7 @@
 package ui;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Iterator;
 
+import java.io.IOException;
 import dataStructureQueue.Queue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,7 +115,7 @@ public class VideoGameStoreGUI {
     	
     }
     
-    public Queue arrayToQueue(String [] array) {
+    public Queue<String> arrayToQueue(String [] array) {
     	Queue<String> queue = new Queue<String>();
     	for (int i = 0; i < array.length; i++) {
 			queue.add(array[i]);
