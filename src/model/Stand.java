@@ -23,7 +23,8 @@ public class Stand {
 			
 			while(!added && pointer>=0) {
 				if(levels[(pointer)]== null) {
-					levels[(pointer)]= new Hashtable(Integer.parseInt(levelValues[0]), Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[2]));
+					levels[(pointer)]= new Hashtable(Integer.parseInt(levelValues[0]),
+							Double.parseDouble(levelValues[1]), Integer.parseInt(levelValues[2]));
 					added = true;
 				}else {
 					pointer--;

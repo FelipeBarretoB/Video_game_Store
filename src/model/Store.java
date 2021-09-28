@@ -239,7 +239,8 @@ public class Store {
 						clientsInRegisters[c]=gameQueue.poll();
 					}
 				}else if(clientsInRegisters[c].getGameStack().isEmpty()) {	
-					print+=clientsInRegisters[c].getCode()+" "+clientsInRegisters[c].getPrice()+"\n"+clientsInRegisters[c].printGames()+"\n";
+					print+=clientsInRegisters[c].getCode()+" "+clientsInRegisters[c].getPrice()+
+							"\n"+clientsInRegisters[c].printGames()+"\n";
 					clientsInRegisters[c]=null;
 				}else if(!clientsInRegisters[c].getGameStack().isEmpty()) {
 					boolean found=false;
